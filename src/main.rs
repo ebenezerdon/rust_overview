@@ -10,7 +10,6 @@ fn main() {
     // println! prints a value to the terminal
     println!("Guess the number!");
     let secret_number = rand::thread_rng().gen_range(1, 101);
-    print!("@@ {}", secret_number );
 
     loop { // create an infinite loop to allow multiple guesses
         println!("Please input your guess.");
@@ -28,8 +27,10 @@ fn main() {
             .expect("Failed to read line"); // if the instance of io::Result is an Err value, this will cause the program to crash and display the passed argument
         // this converts the string input to a number for comparison with the secret_number
         // u32 specifies the number type for our guess variable
-        let guess: u32 = guess.trim().parse()
-            .expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue // if not a number, ignore input. The underscore is a catchall value
+        };
 
         println!("You guessed: {}", guess ); // the set of curly brackets serve as a variable placeholder
 
