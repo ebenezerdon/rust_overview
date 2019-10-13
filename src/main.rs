@@ -9,6 +9,7 @@ use rand::Rng;
 fn main() {
     // println! prints a value to the terminal
     println!("Guess the number!");
+    // let is used to declare a variable
     let secret_number = rand::thread_rng().gen_range(1, 101);
 
     loop { // create an infinite loop to allow multiple guesses
